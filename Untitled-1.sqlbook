@@ -1,0 +1,93 @@
+-- SQLBook: Code
+-- Active: 1704559081650@@172.17.0.2@3306@test
+
+-- CREANDO FUNCIONES MYSQL
+
+
+DROP FUNCTION IF EXISTS hello;
+
+create function IF NOT EXISTS hello (s CHAR(50))
+  RETURNS CHAR(50) DETERMINISTIC
+  RETURN s;
+
+-- SQLBook: Code
+-- Active: 1704559081650@@172.17.0.2@3306@test
+
+create table if not exists users (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) not NULL
+);
+
+
+INSERT INTO users (name) VALUES
+('Mario'), ("Fatima");
+
+DELIMITER //
+
+CREATE PROCEDURE cc ()
+  BEGIN
+    SELECT * FROM users;
+  END //
+
+DELIMITER ;
+
+call cc();
+
+DROP PROCEDURE IF EXISTS cc;
+
+SELECT hello('Word') AS helloFunction;
+
+DELIMITER //
+
+CREATE PROCEDURE cc ()
+  BEGIN
+    SELECT * FROM users;
+  END //
+
+DELIMITER ;
+
+
+SELECT UPPER('hola mundo');
+
+DROP PROCEDURE IF EXISTS cc;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS cc (IN limite int)
+  BEGIN
+    DECLARE non INT DEFAULT 0;
+    my_loop: LOOP
+      set non = non +1;
+      select non;
+
+      IF non = limite THEN
+        LEAVE my_loop;
+      END IF;
+
+    END LOOP my_loop;
+
+  END;
+
+DELIMITER ;
+
+
+call cc(1);
+
+DROP PROCEDURE IF EXISTS while_lopp;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS while_lopp (IN i VARCHAR(255))
+  BEGIN
+    DECLARE x int DEFAULT 1;
+    DECLARE y INT DEFAULT 0;
+
+    WHILE x <= 4 DO
+      SELECT SUBSTRING(i, x, 1);
+      SET x = x + 1;
+    END WHILE;
+  END;
+
+DELIMITER ;
+
+call while_lopp('hola');

@@ -11,7 +11,7 @@ export class AppService {
 	}
 
 	async getHello() {
-		console.log(process.env.TURSO_URL, process.env.TURSO_TOKEN);
-		return await this.connect().execute("select * from games");
+		const { rows } = await this.connect().execute("select * from games");
+		return rows;
 	}
 }
